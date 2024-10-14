@@ -1,13 +1,17 @@
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { addContact } from "../../redux/contactsSlice";
+import { nanoid } from "nanoid";
 
 import css from "./ContactForm.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
-const ContactForm = ({ onSubmit }) => {
+const ContactForm = () => {
   const [isNameFocused, setIsNameFocused] = useState(false);
+  const dispatch = useDispatch();
   const initialValues = {
     name: "",
     number: "",
@@ -24,14 +28,20 @@ const ContactForm = ({ onSubmit }) => {
       .required("Required"),
   });
 
+  const handleSubmit = (values, { resetForm }) => {
+    const contactWithId = {
+      id: nanoid(),
+      ...values,
+    };
+    dispatch(addContact(contactWithId));
+    resetForm();
+  };
+
   return (
     <Formik
       initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values, { resetForm }) => {
-        onSubmit(values);
-        resetForm();
-      }}
+      onSubmit={handleSubmit}
     >
       {({ isSubmitting }) => (
         <Form className={css.contactForm}>
