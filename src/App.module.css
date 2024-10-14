@@ -1,11 +1,17 @@
 #root {
   max-width: 1280px;
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 
-.app {
-  width: 1140px;
-  margin: 0 auto;
+.component {
+  margin: 2rem;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
 }

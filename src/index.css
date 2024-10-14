@@ -1,5 +1,5 @@
 :root {
-  padding: 16px;
+  padding: 100px;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
@@ -7,7 +7,7 @@
 
   line-height: 1.5;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 10px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -49,4 +49,24 @@ img {
 a {
   text-decoration: none;
   outline: none;
+}
+
+.button {
+  background-color: #dedede;
+  color: #333;
+  border: 0.1rem solid #6e6e6e;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #cdcdcd;
+}
+
+.button:disabled {
+  background-color: #767676;
+  cursor: not-allowed;
 }

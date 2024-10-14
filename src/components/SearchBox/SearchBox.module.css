@@ -1,0 +1,21 @@
+.text {
+  font-size: 1.4rem;
+  text-align: left;
+  margin-bottom: 0.4rem;
+}
+
+.input {
+  max-width: 400px;
+  width: 100%;
+  padding: 1rem;
+  padding-right: 4rem;
+  border: 0.1rem solid #6e6e6e;
+  border-radius: 0.4rem;
+  font-size: 1.6rem;
+  margin-bottom: 2rem;
+}
+
+.input:focus {
+  border-color: #cdcdcd;
+  outline: none;
+}

@@ -1,33 +1,63 @@
-import { Routes, Route } from "react-router-dom";
-import { lazy, Suspense } from "react";
+import { useState, useEffect } from "react";
+import { nanoid } from "nanoid";
+
+import ContactForm from "./components/ContactForm/ContactForm.jsx";
+import ContactList from "./components/ContactList/ContactList.jsx";
+import SearchBox from "./components/SearchBox/SearchBox.jsx";
+
 import css from "./App.module.css";
 
-const MoviesPage = lazy(() => import("./pages/MoviesPage/MoviesPage"));
-const MovieDetailsPage = lazy(() =>
-  import("./pages/MovieDetailsPage/MovieDetailsPage")
-);
-const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
-const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
-const Navigation = lazy(() => import("./components/Navigation/Navigation"));
-const MovieCast = lazy(() => import("./components/MovieCast/MovieCast"));
-const MovieReview = lazy(() => import("./components/MovieReview/MovieReview"));
+function App() {
+  const [contacts, setContacts] = useState(() => {
+    const savedContacts = localStorage.getItem("contacts");
+    return savedContacts
+      ? JSON.parse(savedContacts)
+      : [
+          { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
+          { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
+          { id: "id-3", name: "Eden Clements", number: "645-17-79" },
+          { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
+        ];
+  });
 
-export const App = () => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <div className={css.app}>
-      <Navigation />
+  useEffect(() => {
+    localStorage.setItem("contacts", JSON.stringify(contacts));
+  }, [contacts]);
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/movies" element={<MoviesPage />} />
-        <Route path="/movies/:movieId/*" element={<MovieDetailsPage />}>
-          <Route path="cast" element={<MovieCast />} />
-          <Route path="review" element={<MovieReview />} />
-        </Route>
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+  const [filter, setFilter] = useState("");
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
+  };
+
+  const handleDeleteContact = (contactId) => {
+    setContacts((prevContacts) =>
+      prevContacts.filter((contact) => contact.id !== contactId)
+    );
+  };
+
+  const handleAddContact = (newContact) => {
+    const contactWithId = {
+      id: nanoid(),
+      ...newContact,
+    };
+    setContacts((prevContacts) => [...prevContacts, contactWithId]);
+  };
+
+  const filteredContacts = contacts.filter((contact) =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
+  return (
+    <div className={css.component}>
+      <h1 className={css.title}>Phonebook</h1>
+      <ContactForm onSubmit={handleAddContact} />
+      <SearchBox filter={filter} handleFilterChange={handleFilterChange} />
+      <ContactList
+        contacts={filteredContacts}
+        deleteContact={handleDeleteContact}
+      />
     </div>
-  </Suspense>
-);
+  );
+}
 
 export default App;

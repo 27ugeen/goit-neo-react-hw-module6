@@ -1,0 +1,45 @@
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 0.1rem solid #6e6e6e;
+  border-radius: 0.5rem;
+  background-color: #fdfdfd;
+  width: 30rem;
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100% - 8rem);
+}
+
+.iconText {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.icon {
+  margin-right: 0.8rem;
+  color: #333;
+  font-size: 1.4rem;
+}
+
+.name,
+.number {
+  font-size: 1.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.number {
+  font-weight: normal;
+}
+
+.deleteButton {
+  margin-left: 1rem;
+}
