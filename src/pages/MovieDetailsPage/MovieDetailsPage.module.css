@@ -1,0 +1,56 @@
+.image {
+  max-height: 400px;
+  object-fit: cover;
+}
+
+.back {
+  padding: 10px 0;
+  background-color: transparent;
+  color: #4848cf;
+  border: none;
+  outline: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.back:hover {
+  text-decoration: underline;
+  color: #222264;
+}
+
+.info {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+span:not(:last-child)::after {
+  content: ", ";
+}
+
+.subNav {
+  padding: 20px 0;
+}
+
+.subLink {
+  display: inline-flex;
+  padding: 0 10px;
+  color: #4848cf;
+}
+
+.subLink:hover {
+  text-decoration: underline;
+  color: #222264;
+}
+
+.title {
+  font-size: 36px;
+  font-weight: 800;
+}
+
+p {
+  font-size: 12px;
+  font-weight: 400;
+  color: #ccc;
+  margin-bottom: 5px;
+}
